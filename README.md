@@ -1,24 +1,40 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/alexialuzdeferro/pombagira-revelada/main/Al%C3%AA%20(3).png" width="180" style="border-radius: 50%; border: 4px solid rgba(255,0,110,.75); box-shadow: 0 0 24px rgba(255,0,110,.25);">
+<img src="https://raw.githubusercontent.com/alexialuzdeferro/pombagira-revelada/main/Al%C3%AA%20(3).png" width="200" style="border-radius: 50%; border: 3px solid #ff006e; box-shadow: 0 0 30px rgba(255, 0, 110, 0.4), 0 0 60px rgba(6, 255, 165, 0.2); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 0 40px rgba(255, 0, 110, 0.6), 0 0 80px rgba(6, 255, 165, 0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 30px rgba(255, 0, 110, 0.4), 0 0 60px rgba(6, 255, 165, 0.2)'">
 
 <br><br>
 
 # 🔱 HUB CENTRAL ABSOLUTO
 
-<h3 style="color: #ff006e;">Alexia Melusine | Rosa de Fogo • Luz de Ferro</h3>
+<h3 style="color: #ff006e; text-shadow: 0 0 15px rgba(255, 0, 110, 0.5);">Alexia Melusine | Rosa de Fogo • Luz de Ferro</h3>
 
 <p align="center">
   <i>Portal de navegação para 42 dimensões digitais interconectadas</i>
 </p>
 
 <p align="center">
-  <a href="https://alexialuzdeferro.github.io/start/">
-    <img src="https://img.shields.io/badge/ACESSE_O_HUB-AO_VIVO-ff006e?style=for-the-badge&logo=github&logoColor=white" alt="Link do Site">
+  <a href="https://alexialuzdeferro.github.io/start/" 
+     style="display: inline-block; padding: 12px 28px; background: linear-gradient(135deg, #ff006e, #8338ec, #06ffa5); color: white; text-decoration: none; border-radius: 50px; font-weight: bold; border: 2px solid rgba(255, 255, 255, 0.1); box-shadow: 0 0 20px rgba(255, 0, 110, 0.3); transition: all 0.3s ease; position: relative; overflow: hidden;"
+     onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 0 30px rgba(255, 0, 110, 0.5), 0 0 50px rgba(6, 255, 165, 0.2)'; this.style.background='linear-gradient(135deg, #ff3380, #9a4eff, #39ffc3)'"
+     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 0 20px rgba(255, 0, 110, 0.3)'; this.style.background='linear-gradient(135deg, #ff006e, #8338ec, #06ffa5)'"
+     onclick="this.style.transform='scale(0.95)'; setTimeout(()=>{this.style.transform='translateY(0)'}, 150); this.style.boxShadow='0 0 40px rgba(255, 0, 110, 0.7), 0 0 70px rgba(6, 255, 165, 0.4)'">
+    🌹 ACESSAR PORTAL AO VIVO 🌹
   </a>
 </p>
 
----
+<p align="center">
+  <a href="https://github.com/alexialuzdeferro/start">
+    <img src="https://img.shields.io/github/stars/alexialuzdeferro/start?style=for-the-badge&color=ff006e&label=STARS" alt="GitHub Stars">
+  </a>
+  <a href="https://github.com/alexialuzdeferro/start/fork">
+    <img src="https://img.shields.io/badge/FORK-8338ec?style=for-the-badge&logo=github&logoColor=white" alt="Fork">
+  </a>
+  <a href="https://alexialuzdeferro.github.io/start/">
+    <img src="https://img.shields.io/badge/STATUS-ATIVO-06ffa5?style=for-the-badge" alt="Status">
+  </a>
+</p>
+
+<div style="width: 80%; height: 2px; background: linear-gradient(90deg, transparent, #ff006e, #06ffa5, #8338ec, transparent); margin: 30px auto; border-radius: 2px;"></div>
 
 </div>
 
@@ -48,67 +64,22 @@ Um hub digital desenvolvido com estética **Visceral-Futurista (Tendência 2026)
 
 O sistema organiza 42 portais em **10 Esferas de Poder**:
 
-### 1. 🏆 **PÁGINAS OFICIAIS** (3 portais)
-- Bio Site Oficial — Almas de Pombagira
-- Linktree — Alexia Rosa de Fogo  
-- Site Canva — Pombagiras
+<div align="center">
 
-### 2. 👤 **PERFIS & CARTÕES** (5 portais)
-- Alexia Melusine (Photos)
-- Melusine (Photos1)
-- Visitas Card
-- Melusine Redes (Top)
-- Card Photos (Vip)
+| Reino | Ícone | Portais | Descrição |
+|-------|-------|---------|-----------|
+| **Páginas Oficiais** | 🏆 | 3 | Entradas principais e hubs oficiais |
+| **Perfis & Cartões** | 👤 | 5 | Perfis pessoais e cartões de identidade |
+| **Hubs & Redes** | 🌐 | 6 | Centrais de links e redes sociais |
+| **Reino Pombagira** | 🌹 | 6 | Portais, revelações e rainhas |
+| **Oráculos & Cartas** | 🎴 | 4 | Ferramentas de autoconhecimento espiritual |
+| **Meditação & Paz** | 🧘 | 4 | Espaços de relaxamento e paz interior |
+| **Giras & Sons** | 🎵 | 5 | Experiências sonoras e rituais de gira |
+| **Rituais** | 🕯️ | 1 | Ferramentas para prática diária |
+| **Cartões Visita** | 🃏 | 3 | Cartões rápidos para compartilhar |
+| **Música Gótica** | 🦇 | 5 | Atmosferas dark e soundscapes |
 
-### 3. 🌐 **HUBS & REDES** (6 portais)
-- Redes Sociais (Cartoon)
-- Almas de Pombagira (QUIZZ)
-- Hub-Pombagiras
-- Social Hub
-- Super Hub Central
-- Hub-Central-Pombagiras
-
-### 4. 🌹 **REINO POMBAGIRA** (6 portais)
-- Pombagira (portal)
-- Pombagira Revelada (QUIZZ)
-- Pombagira Revelada (PORTAL)
-- 12 Rainhas — Pombagiras
-- Pombagiras (PÁGINA)
-- Grimório das Pombagiras (Vip)
-
-### 5. 🎴 **ORÁCULOS & CARTAS** (4 portais)
-- Oráculo Pombagiras
-- 12 Oráculo
-- Cartas Rosa e Fogo
-- Minha Pombagira
-
-### 6. 🧘 **MEDITAÇÃO & PAZ** (4 portais)
-- Paz
-- Relaxamento
-- Paz Interior
-- Meditação
-
-### 7. 🎵 **GIRAS & PONTOS CANTADOS** (5 portais)
-- Mistério das Giras
-- Gira Completa
-- Giras
-- Pontos Cantados
-- Soundboard Pombagiras
-
-### 8. 🕯️ **RITUAIS & FERRAMENTAS** (1 portal)
-- Velas Virtuais
-
-### 9. 🃏 **CARTÕES DE VISITA** (3 portais)
-- Business Card
-- Card Visit
-- Melusine Card
-
-### 10. 🦇 **MÚSICA & SOM GÓTICO** (5 portais)
-- Dark Melancholy
-- TV Cyber Goth
-- Vampire Waves
-- Dark TV
-- Dark Music
+</div>
 
 ## ⚙️ TECNOLOGIAS & CONCEITOS
 
@@ -148,7 +119,7 @@ O sistema organiza 42 portais em **10 Esferas de Poder**:
 ## 🚀 COMO UTILIZAR
 
 ### Para Visitantes:
-1. **Acesse** o [Hub Central Ao Vivo](https://alexialuzdeferro.github.io/start/)
+1. **Clique no botão acima** "ACESSAR PORTAL AO VIVO"
 2. **Navegue** pelas categorias ou use a busca
 3. **Clique** em qualquer portal para explorar
 4. **Use a busca:** digite **pombagira**, **oráculo**, **meditação**, **dark**…
@@ -163,3 +134,4 @@ git clone https://github.com/alexialuzdeferro/start.git
 open index.html
 # Ou
 xdg-open index.html
+# Ou simplesmente arraste o index.html para seu navegador
