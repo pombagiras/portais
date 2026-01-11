@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alexia Melusine | Rosa de Fogo • Luz de Ferro</title>
+
+  <!-- Tailwind (requisito) -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blood-fresh: #ff006e;
+      --blood-dried: #8a0000;
+      --vein-blue: #06ffa5;
+      --bone-white: #f0f0f0;
+      --darkness: #0a0a0a;
+      --neon-purple: #8338ec;
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --card-bg: rgba(10, 10, 10, 0.78);
+      --stroke: rgba(255, 0, 110, 0.18);
+    }
+
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      background: linear-gradient(135deg, var(--darkness) 0%, #1a0a1f 50%, var(--darkness) 100%);
+      color: var(--bone-white);
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* Partículas */
+    body::before {
+      content: '';
+      position: fixed;
+      width: 300%;
+      height: 300%;
+      top: -100%;
+      left: -100%;
+      background-image:
+        radial-gradient(circle, var(--blood-fresh) 1px, transparent 1px),
+        radial-gradient(circle, var(--vein-blue) 1px, transparent 1px);
+      background-size: 60px 60px, 90px 90px;
+      background-position: 0 0, 40px 40px;
+      animation: particles 22s linear infinite;
+      opacity: 0.08;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    @keyframes particles { to { transform: translate(-100px, -100px); } }
+
+    /* CRT overlay */
+    .crt-blood {
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(255, 0, 110, 0.020) 0px,
+        rgba(255, 0, 110, 0.020) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      pointer-events: none;
+      z-index: 50;
+      mix-blend-mode: overlay;
+      opacity: 0.7;
+    }
+
+    /* Motion safety */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+      body::before { animation: none !important; }
+      .crt-blood { display: none; }
+    }
+
+    header {
+      position: relative;
+      min-height: 86vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 1.25rem;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-gradient {
+      position: absolute;
+      width: 160%;
+      height: 160%;
+      inset: -30%;
+      background:
+        radial-gradient(circle at 30% 50%, var(--blood-fresh), transparent 50%),
+        radial-gradient(circle at 70% 45%, var(--neon-purple), transparent 50%),
+        radial-gradient(circle at 50% 80%, var(--vein-blue), transparent 48%);
+      animation: gradient-shift 12s ease-in-out infinite;
+      filter: blur(110px);
+      opacity: 0.36;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    @keyframes gradient-shift {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(60px, -40px) scale(1.08); }
+    }
+
+    .logo-container {
+      width: 190px;
+      height: 190px;
+      margin: 0 auto 1.5rem;
+      border-radius: 9999px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 2px solid transparent;
+      border-image: linear-gradient(135deg, var(--blood-fresh), var(--vein-blue), var(--neon-purple)) 1;
+      padding: 10px;
+      animation: float 7s ease-in-out infinite;
+      box-shadow:
+        0 0 40px rgba(255, 0, 110, 0.35),
+        0 0 90px rgba(131, 56, 236, 0.22);
+      overflow: hidden;
+    }
+
+    .logo-container img { width: 100%; height: 100%; object-fit: cover; border-radius: 9999px; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-16px) rotate(3deg); }
+    }
+
+    h1 {
+      font-size: clamp(2.35rem, 7.4vw, 4.75rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--blood-fresh), var(--vein-blue), var(--neon-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      filter: drop-shadow(0 0 18px rgba(255, 0, 110, 0.35));
+    }
+
+    .subtitle {
+      font-size: clamp(1rem, 2.8vw, 1.5rem);
+      color: var(--vein-blue);
+      margin-bottom: 0.65rem;
+      text-shadow: 0 0 16px rgba(6, 255, 165, 0.22);
+    }
+
+    .tagline {
+      font-size: clamp(0.95rem, 2.3vw, 1.12rem);
+      color: rgba(255, 255, 255, 0.82);
+      max-width: 920px;
+      margin: 0.6rem auto 0;
+      line-height: 1.65;
+    }
+
+    .section-visceral {
+      padding: 4rem 1.25rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4.6vw, 3.2rem);
+      text-align: center;
+      margin-bottom: 2.75rem;
+      background: linear-gradient(135deg, var(--blood-fresh), var(--neon-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 900;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 104px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blood-fresh), var(--vein-blue));
+      border-radius: 2px;
+      opacity: 0.9;
+    }
+
+    .grid-visceral {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.4rem;
+    }
+
+    .card-blade {
+      background: var(--card-bg);
+      backdrop-filter: blur(18px);
+      border-radius: 16px;
+      padding: 1.65rem;
+      border: 1px solid var(--stroke);
+      transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    /* Garante que NADA fique por cima dos links */
+    .card-blade::before {
+      content: '';
+      position: absolute;
+      inset: -40%;
+      background: linear-gradient(45deg, transparent, rgba(255, 0, 110, 0.55), transparent);
+      transform: rotate(35deg) translateX(-35%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .card-blade > * { position: relative; z-index: 1; }
+
+    .card-blade:hover::before { opacity: 0.09; }
+
+    .card-blade:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255, 0, 110, 0.55);
+      box-shadow: 0 18px 56px rgba(255, 0, 110, 0.18);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 0.7rem;
+      display: inline-flex;
+      color: var(--vein-blue);
+    }
+
+    .card-blade h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.55rem;
+      color: var(--vein-blue);
+      font-weight: 800;
+    }
+
+    .card-blade p {
+      color: rgba(255, 255, 255, 0.78);
+      line-height: 1.6;
+      margin-bottom: 1.1rem;
+    }
+
+    .card-links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .link-cut {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.48rem 0.9rem;
+      background: rgba(255, 0, 110, 0.16);
+      border: 1px solid rgba(255, 0, 110, 0.55);
+      border-radius: 9999px;
+      color: var(--bone-white);
+      text-decoration: none;
+      font-size: 0.86rem;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      user-select: none;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .link-cut:hover {
+      background: rgba(255, 0, 110, 0.75);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(255, 0, 110, 0.28);
+      border-color: rgba(6, 255, 165, 0.35);
+    }
+
+    .link-cut .tiny {
+      font-size: 0.78rem;
+      opacity: 0.85;
+    }
+
+    /* Search bar */
+    .search-shell {
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255, 0, 110, 0.22);
+      backdrop-filter: blur(12px);
+      border-radius: 18px;
+      padding: 1rem;
+      display: grid;
+      gap: 0.75rem;
+      margin: 0 auto 1.4rem;
+      max-width: 980px;
+    }
+
+    .search-shell input, .search-shell select {
+      width: 100%;
+      padding: 0.75rem 0.9rem;
+      border-radius: 12px;
+      border: 1px solid rgba(6,255,165,0.25);
+      background: rgba(10,10,10,0.55);
+      color: rgba(255,255,255,0.92);
+      outline: none;
+    }
+
+    .search-shell input:focus, .search-shell select:focus {
+      border-color: rgba(6,255,165,0.55);
+      box-shadow: 0 0 0 3px rgba(6,255,165,0.12);
+    }
+
+    .meta-line {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      color: rgba(255,255,255,0.72);
+      font-size: 0.92rem;
+    }
+
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.75rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 0, 110, 0.22);
+      background: rgba(10,10,10,0.35);
+    }
+
+    /* Gallery */
+    .gallery {
+      padding: 4rem 1.25rem;
+      background: linear-gradient(180deg, transparent, rgba(255, 0, 110, 0.045), transparent);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 1;
+      cursor: pointer;
+      transition: transform 0.28s ease;
+      border: 1px solid rgba(255, 0, 110, 0.18);
+      background: rgba(0,0,0,0.2);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-item:hover { transform: translateY(-4px); border-color: rgba(255, 0, 110, 0.55); }
+    .gallery-item:hover img { transform: scale(1.08); }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.82);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      z-index: 60;
+    }
+
+    .modal.open { display: flex; }
+
+    .modal-card {
+      width: min(980px, 100%);
+      background: rgba(10,10,10,0.75);
+      border: 1px solid rgba(255, 0, 110, 0.25);
+      border-radius: 18px;
+      overflow: hidden;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 30px 120px rgba(0,0,0,0.6);
+    }
+
+    .modal-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.85);
+      gap: 0.75rem;
+    }
+
+    .modal-top button {
+      border: 1px solid rgba(6,255,165,0.25);
+      background: rgba(0,0,0,0.25);
+      color: rgba(255,255,255,0.85);
+      padding: 0.45rem 0.75rem;
+      border-radius: 9999px;
+      cursor: pointer;
+    }
+
+    .modal-top button:hover { border-color: rgba(6,255,165,0.55); }
+
+    .modal-img {
+      width: 100%;
+      height: min(76vh, 680px);
+      object-fit: contain;
+      background: rgba(0,0,0,0.35);
+    }
+
+    /* Footer */
+    footer {
+      padding: 4rem 1.25rem;
+      text-align: center;
+      background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.5));
+      border-top: 1px solid rgba(255, 0, 110, 0.18);
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      margin: 1.8rem 0;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(10px);
+      border-radius: 9999px;
+      border: 1px solid rgba(6, 255, 165, 0.35);
+      color: var(--vein-blue);
+      text-decoration: none;
+      font-size: 1.4rem;
+      transition: transform 0.22s ease, background 0.22s ease, color 0.22s ease, border-color 0.22s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .social-link:hover {
+      background: rgba(6, 255, 165, 0.85);
+      color: var(--darkness);
+      transform: translateY(-6px);
+      border-color: rgba(255,0,110,0.22);
+      box-shadow: 0 12px 40px rgba(6, 255, 165, 0.22);
+    }
+
+    .footer-text { color: rgba(255, 255, 255, 0.62); margin-top: 1.6rem; line-height: 1.65; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-track { background: var(--darkness); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(var(--blood-fresh), var(--neon-purple)); border-radius: 5px; }
+    ::-webkit-scrollbar-thumb:hover { background: linear-gradient(var(--neon-purple), var(--blood-fresh)); }
+
+    @media (max-width: 768px) {
+      .logo-container { width: 170px; height: 170px; }
+      .social-link { width: 50px; height: 50px; font-size: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- CRT overlay -->
+  <div class="crt-blood" aria-hidden="true"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="hero-gradient" aria-hidden="true"></div>
+    <div class="relative z-10">
+      <a class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[70] focus:bg-black/80 focus:text-white focus:px-3 focus:py-2 focus:rounded-lg" href="#explorar">Pular para os links</a>
+
+      <div class="logo-container">
+        <img
+          src="https://raw.githubusercontent.com/alexialuzdeferro/pombagira-revelada/main/Al%C3%AA%20(3).png"
+          alt="Alexia Melusine"
+          loading="eager"
+          onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\"><rect width=\"200\" height=\"200\" fill=\"%230a0a0a\"/><text x=\"50%\" y=\"50%\" font-family=\"Arial\" font-size=\"24\" fill=\"%23ff006e\" text-anchor=\"middle\" dy=\".3em\">AM</text></svg>'"
+        />
+      </div>
+
+      <h1 id="topTitle">Alexia Melusine</h1>
+      <p class="subtitle">Rosa de Fogo • Luz de Ferro</p>
+      <p class="tagline">
+        🏳️‍⚧️ Guardiã dos Mistérios das Pombagiras | Criadora de Portais Espirituais |
+        Energia Trans • Não-Binária • Fluida • Livre • Visceral
+      </p>
+
+      <div class="mt-8">
+        <a href="#explorar" class="link-cut" style="padding:0.55rem 1rem;">⬇️ <span>Ir para os Portais</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Portais (42 links) -->
+  <section id="explorar" class="section-visceral">
+    <h2 class="section-title">🔮 Portais & Conexões</h2>
+
+    <div class="search-shell" role="search" aria-label="Buscar links">
+      <div class="grid gap-3 md:grid-cols-2">
+        <label class="grid gap-1">
+          <span class="text-sm text-white/70">Buscar por nome ou URL</span>
+          <input id="searchInput" type="search" placeholder="Ex.: oráculo, pombagira, dark, meditação..." autocomplete="off" />
+        </label>
+        <label class="grid gap-1">
+          <span class="text-sm text-white/70">Categoria</span>
+          <select id="categorySelect"></select>
+        </label>
+      </div>
+      <div class="meta-line">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="meta-pill">📌 Mostrando: <strong class="text-white/90" id="shownLinks">—</strong></span>
+          <span class="meta-pill">✅ Total: <strong class="text-white/90" id="allLinks">—</strong></span>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <button id="clearFilters" class="link-cut" type="button" title="Limpar filtros">🧼 <span class="tiny">Limpar</span></button>
+          <button id="copyAll" class="link-cut" type="button" title="Copiar todos os links (texto)">📋 <span class="tiny">Copiar lista</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-visceral" id="portalGrid" aria-label="Lista de portais"></div>
+
+    <p class="mt-6 text-center text-white/60 text-sm">
+      Dica: use a busca para encontrar rapidamente qualquer portal. Os 42 links foram organizados por tema.
+    </p>
+  </section>
+
+  <!-- Galeria -->
+  <section class="gallery" aria-label="Galeria visual">
+    <h2 class="section-title">✨ Galeria Visual</h2>
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-item" data-src="https://raw.githubusercontent.com/alexialuzdeferro/pombagira-revelada/main/Al%C3%AA%20(3).png" data-title="Alexia — Rosa de Fogo">
+        <img
+          src="https://raw.githubusercontent.com/alexialuzdeferro/pombagira-revelada/main/Al%C3%AA%20(3).png"
+          alt="Alexia Rosa de Fogo"
+          loading="lazy"
+          onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\"><rect width=\"200\" height=\"200\" fill=\"%230a0a0a\"/><circle cx=\"100\" cy=\"100\" r=\"80\" fill=\"%23ff006e\" opacity=\"0.28\"/></svg>'"
+        />
+      </div>
+      <div class="gallery-item" data-src="https://raw.githubusercontent.com/alexialuzdeferro/pombagira-revelada/main/Al%C3%AA%20(4).png" data-title="Alexia — Luz de Ferro">
+        <img
+          src="https://raw.githubusercontent.com/alexialuzdeferro/pombagira-revelada/main/Al%C3%AA%20(4).png"
+          alt="Alexia Luz de Ferro"
+          loading="lazy"
+          onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\"><rect width=\"200\" height=\"200\" fill=\"%230a0a0a\"/><circle cx=\"100\" cy=\"100\" r=\"80\" fill=\"%2306ffa5\" opacity=\"0.24\"/></svg>'"
+        />
+      </div>
+      <div class="gallery-item" data-src="https://raw.githubusercontent.com/alexialuzdeferro/pombagira-revelada/main/Al%C3%AA%20(5).png" data-title="Alexia — Melusine">
+        <img
+          src="https://raw.githubusercontent.com/alexialuzdeferro/pombagira-revelada/main/Al%C3%AA%20(5).png"
+          alt="Alexia Melusine"
+          loading="lazy"
+          onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 200 200\"><rect width=\"200\" height=\"200\" fill=\"%230a0a0a\"/><circle cx=\"100\" cy=\"100\" r=\"80\" fill=\"%238338ec\" opacity=\"0.25\"/></svg>'"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal de imagem -->
+  <div class="modal" id="imgModal" role="dialog" aria-modal="true" aria-label="Visualização de imagem">
+    <div class="modal-card">
+      <div class="modal-top">
+        <div class="truncate" id="modalTitle">Imagem</div>
+        <div class="flex items-center gap-2">
+          <button id="modalOpen" type="button" title="Abrir">Abrir</button>
+          <button id="modalClose" type="button" title="Fechar">Fechar</button>
+        </div>
+      </div>
+      <img class="modal-img" id="modalImg" alt="" />
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <h2 class="section-title">💫 Conecte-se Comigo</h2>
+    <p class="tagline">Siga minha jornada espiritual, trans, não-binária e cheia de vida</p>
+
+    <div class="social-links">
+      <a href="https://linktr.ee/alexiarosadefogo" class="social-link" title="Linktree">🔗</a>
+      <a href="https://bio.site/AlmasdePombagira" class="social-link" title="Bio.site">🌐</a>
+      <a href="https://pombagiras.my.canva.site/" class="social-link" title="Site Canva">🌹</a>
+      <a href="#explorar" class="social-link" title="Voltar aos links">⬆️</a>
+    </div>
+
+    <p class="footer-text">
+      © 2026 Alexia Melusine — Rosa de Fogo • Luz de Ferro<br />
+      🏳️‍⚧️ Trans • Não-Binária • Libriana • Livre • Fluida<br />
+      Guardiã dos Mistérios das Pombagiras
+    </p>
+  </footer>
+
+  <script>
+    // =============================
+    //  DADOS (42 links organizados)
+    // =============================
+    const PORTALS = [
+      {
+        category: 'Minhas páginas oficiais',
+        icon: '🏆',
+        description: 'Entradas principais e hubs oficiais.',
+        links: [
+          { label: 'Bio.site — Almas de Pombagira', url: 'https://bio.site/AlmasdePombagira' },
+          { label: 'Linktree — Alexia Rosa de Fogo', url: 'https://linktr.ee/alexiarosadefogo' },
+          { label: 'Site Canva — Pombagiras', url: 'https://pombagiras.my.canva.site/' },
+        ],
+      },
+      {
+        category: 'Perfis, páginas e cartões',
+        icon: '👤',
+        description: 'Perfis pessoais, páginas "sobre" e cartões.',
+        links: [
+          { label: 'Alexia Melusine (Photos)', url: 'https://alexialuzdeferro.github.io/alexia-melusine/' },
+          { label: 'Melusine (Photos1)', url: 'https://alexialuzdeferro.github.io/melusine/' },
+          { label: 'Visitas Card', url: 'https://alexialuzdeferro.github.io/visitas-card/' },
+          { label: 'Melusine Redes (Top)', url: 'https://alexialuzdeferro.github.io/melusine_redes/' },
+          { label: 'Card Photos (Vip)', url: 'https://alexialuzdeferro.github.io/card-photos/' },
+        ],
+      },
+      {
+        category: 'Hubs e redes',
+        icon: '🌐',
+        description: 'Centrais de links e redes sociais.',
+        links: [
+          { label: 'Redes Sociais (́Cartoon)', url: 'https://alexialuzdeferro.github.io/redes_sociais/' },
+          { label: 'Almas de Pombagira (QUIZZ)', url: 'https://alexialuzdeferro.github.io/almasdepombagira/' },
+          { label: 'Redes Sociais - Pombagiras', url: 'https://alexialuzdeferro.github.io/Hub-Pombagiras/' },
+          { label: 'Social Redes', url: 'https://alexialuzdeferro.github.io/social-hub/' },
+          { label: 'Super Hub Central', url: 'https://alexialuzdeferro.github.io/super-hub-central/' },
+          { label: 'Social - Central Pombagiras', url: 'https://alexialuzdeferro.github.io/Hub-Central-Pombagiras/' },
+        ],
+      },
+      {
+        category: 'Pombagiras (portais)',
+        icon: '🌹',
+        description: 'Portais, revelações e rainhas.',
+        links: [
+          { label: 'Pombagira (portal)', url: 'https://alexialuzdeferro.github.io/pombagira/' },
+          { label: 'Pombagira Revelada (QUIZZ)', url: 'https://alexialuzdeferro.github.io/pombagira-revelada/' },
+          { label: 'Pombagira Revelada (PORTAL)', url: 'https://alexialuzdeferro.github.io/pombagira_revelada/' },
+          { label: '12 Rainhas — Pombagiras', url: 'https://alexialuzdeferro.github.io/12rainhas-pombagiras/' },
+          { label: 'Pombagiras (PÁGINA)', url: 'https://alexialuzdeferro.github.io/Pombagiras/' },
+          { label: 'Grimório das Pombagiras (Vip)', url: 'https://alexialuzdeferro.github.io/grimorio-das-pombagiras/' },
+        ],
+      },
+      {
+        category: 'Oráculos e cartas',
+        icon: '🎴',
+        description: 'Ferramentas de autoconhecimento e conexão espiritual.',
+        links: [
+          { label: 'Oráculo Pombagiras', url: 'https://alexialuzdeferro.github.io/oraculo-pombagiras/' },
+          { label: '12 Oráculo', url: 'https://alexialuzdeferro.github.io/12-oraculo/' },
+          { label: 'Cartas Rosa e Fogo', url: 'https://alexialuzdeferro.github.io/Cartas-Rosa-e-Fogo/' },
+          { label: 'Minha Pombagira', url: 'https://alexialuzdeferro.github.io/minha-pombagira/' },
+        ],
+      },
+      {
+        category: 'Meditação e paz',
+        icon: '🧘',
+        description: 'Portais para relaxamento, paz e práticas meditativas.',
+        links: [
+          { label: 'Paz', url: 'https://alexialuzdeferro.github.io/paz/' },
+          { label: 'Relaxamento', url: 'https://alexialuzdeferro.github.io/relaxamento/' },
+          { label: 'Paz Interior', url: 'https://alexialuzdeferro.github.io/paz_interior/' },
+          { label: 'Meditação', url: 'https://alexialuzdeferro.github.io/medita-o/' },
+        ],
+      },
+      {
+        category: 'Giras e pontos cantados',
+        icon: '🎵',
+        description: 'Experiências sonoras e rituais de gira.',
+        links: [
+          { label: 'Mistério das Giras', url: 'https://alexialuzdeferro.github.io/misterio-das-giras/' },
+          { label: 'Gira Completa', url: 'https://alexialuzdeferro.github.io/gira-completa/' },
+          { label: 'Giras', url: 'https://alexialuzdeferro.github.io/giras/' },
+          { label: 'Pontos Cantados', url: 'https://alexialuzdeferro.github.io/PONTOS-CANTADOS/' },
+          { label: 'Soundboard Pombagiras', url: 'https://alexialuzdeferro.github.io/-Soundboard-Pombagiras-/' },
+        ],
+      },
+      {
+        category: 'Rituais e ferramentas',
+        icon: '🕯️',
+        description: 'Ferramentas para prática e presença diária.',
+        links: [
+          { label: 'Velas Virtuais', url: 'https://alexialuzdeferro.github.io/Velas-Virtuais/' },
+        ],
+      },
+      {
+        category: 'Cartões de visita',
+        icon: '🃏',
+        description: 'Cartões rápidos para compartilhar.',
+        links: [
+          { label: 'Business Card', url: 'https://alexialuzdeferro.github.io/Business-Card/' },
+          { label: 'Card Visit', url: 'https://alexialuzdeferro.github.io/card_visit/' },
+          { label: 'Melusine Card', url: 'https://alexialuzdeferro.github.io/melusine-card/' },
+        ],
+      },
+      {
+        category: 'Música e som gótico',
+        icon: '🦇',
+        description: 'Atmosferas dark, TV e soundscapes.',
+        links: [
+          { label: 'Dark Melancholy', url: 'https://alexialuzdeferro.github.io/dark-melancholy/' },
+          { label: 'TV Cyber Goth', url: 'https://alexialuzdeferro.github.io/tv-cyber-goth/' },
+          { label: 'Vampire Waves', url: 'https://alexialuzdeferro.github.io/vampire-waves/' },
+          { label: 'Dark TV', url: 'https://alexialuzdeferro.github.io/dark-tv/' },
+          { label: 'Dark Music', url: 'https://alexialuzdeferro.github.io/dark-music/' },
+        ],
+      },
+    ];
+
+    function flattenLinks() {
+      return PORTALS.flatMap(group => group.links.map(l => ({ ...l, category: group.category })));
+    }
+
+    // =============================
+    //  Renderização
+    // =============================
+    const portalGrid = document.getElementById('portalGrid');
+    const categorySelect = document.getElementById('categorySelect');
+    const searchInput = document.getElementById('searchInput');
+    const clearFilters = document.getElementById('clearFilters');
+    const copyAllBtn = document.getElementById('copyAll');
+
+    const shownLinksEl = document.getElementById('shownLinks');
+    const allLinksEl = document.getElementById('allLinks');
+
+    function safeExternalLink(url) {
+      // Normaliza/valida
+      try {
+        const u = new URL(url);
+        return u.toString();
+      } catch {
+        return url;
+      }
+    }
+
+    function buildCard(group) {
+      const card = document.createElement('article');
+      card.className = 'card-blade';
+      card.dataset.category = group.category;
+
+      const titleId = 't_' + Math.random().toString(36).slice(2);
+      card.innerHTML = `
+        <span class="card-icon" aria-hidden="true">${group.icon}</span>
+        <h3 id="${titleId}">${group.category}</h3>
+        <p>${group.description}</p>
+        <div class="card-links" aria-labelledby="${titleId}"></div>
+      `;
+
+      const linksWrap = card.querySelector('.card-links');
+      for (const link of group.links) {
+        const a = document.createElement('a');
+        a.className = 'link-cut';
+        a.href = safeExternalLink(link.url);
+
+        // IMPORTANTE: para funcionar em navegadores embutidos (Instagram/WhatsApp etc.),
+        // evitamos target="_blank" (muitas vezes é bloqueado e parece que "não acontece nada").
+        a.target = '_self';
+
+        a.title = link.url;
+        a.innerHTML = `↗ <span>${link.label}</span>`;
+        linksWrap.appendChild(a);
+      }
+
+      return card;
+    }
+
+    function renderAll() {
+      portalGrid.innerHTML = '';
+      for (const group of PORTALS) portalGrid.appendChild(buildCard(group));
+    }
+
+    function populateCategorySelect() {
+      const categories = ['Todas as categorias', ...PORTALS.map(p => p.category)];
+      categorySelect.innerHTML = '';
+      for (const c of categories) {
+        const opt = document.createElement('option');
+        opt.value = c;
+        opt.textContent = c;
+        categorySelect.appendChild(opt);
+      }
+    }
+
+    function applyFilters() {
+      const q = (searchInput.value || '').trim().toLowerCase();
+      const cat = categorySelect.value;
+
+      let shown = 0;
+      const all = flattenLinks().length;
+
+      for (const card of portalGrid.querySelectorAll('.card-blade')) {
+        const cardCat = card.dataset.category;
+        const matchCat = (cat === 'Todas as categorias') || (cardCat === cat);
+
+        let matchText = false;
+        if (!q) {
+          matchText = true;
+        } else {
+          const links = [...card.querySelectorAll('a.link-cut')];
+          matchText = links.some(a => (a.textContent + ' ' + a.href).toLowerCase().includes(q));
+        }
+
+        const visible = matchCat && matchText;
+        card.style.display = visible ? '' : 'none';
+
+        if (visible) shown += card.querySelectorAll('a.link-cut').length;
+      }
+
+      shownLinksEl.textContent = shown.toLocaleString('pt-BR');
+      allLinksEl.textContent = all.toLocaleString('pt-BR');
+    }
+
+    async function copyAllLinksToClipboard() {
+      const links = flattenLinks();
+      const lines = links.map((l, i) => `${String(i + 1).padStart(2, '0')}. [${l.category}] ${l.label} — ${l.url}`);
+      const text = lines.join('\n');
+      try {
+        await navigator.clipboard.writeText(text);
+        copyAllBtn.innerHTML = '✅ <span class="tiny">Copiado</span>';
+        setTimeout(() => (copyAllBtn.innerHTML = '📋 <span class="tiny">Copiar lista</span>'), 1200);
+      } catch {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+        copyAllBtn.innerHTML = '✅ <span class="tiny">Copiado</span>';
+        setTimeout(() => (copyAllBtn.innerHTML = '📋 <span class="tiny">Copiar lista</span>'), 1200);
+      }
+    }
+
+    // =============================
+    //  Modal da galeria
+    // =============================
+    const imgModal = document.getElementById('imgModal');
+    const modalImg = document.getElementById('modalImg');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalClose = document.getElementById('modalClose');
+    const modalOpen = document.getElementById('modalOpen');
+
+    let currentModalSrc = '';
+
+    function openModal(src, title) {
+      currentModalSrc = src;
+      modalImg.src = src;
+      modalImg.alt = title || 'Imagem';
+      modalTitle.textContent = title || 'Imagem';
+      imgModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      imgModal.classList.remove('open');
+      document.body.style.overflow = '';
+      modalImg.src = '';
+      currentModalSrc = '';
+    }
+
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('click', () => openModal(item.dataset.src, item.dataset.title));
+    });
+
+    modalClose.addEventListener('click', closeModal);
+    imgModal.addEventListener('click', (e) => { if (e.target === imgModal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && imgModal.classList.contains('open')) closeModal(); });
+
+    modalOpen.addEventListener('click', () => {
+      // Tenta abrir; se o navegador bloquear pop-up, o usuário ainda pode dar "abrir imagem" pelo menu.
+      if (!currentModalSrc) return;
+      window.location.href = currentModalSrc;
+    });
+
+    // =============================
+    //  Scroll suave para âncoras
+    // =============================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        if (!targetId || targetId === '#') return;
+        const target = document.querySelector(targetId);
+        if (!target) return;
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // =============================
+    //  Init
+    // =============================
+    function initUI() {
+      renderAll();
+      populateCategorySelect();
+      applyFilters();
+
+      searchInput.addEventListener('input', applyFilters);
+      categorySelect.addEventListener('change', applyFilters);
+
+      clearFilters.addEventListener('click', () => {
+        searchInput.value = '';
+        categorySelect.value = 'Todas as categorias';
+        applyFilters();
+        searchInput.focus();
+      });
+
+      copyAllBtn.addEventListener('click', copyAllLinksToClipboard);
+
+      // números iniciais
+      const total = flattenLinks().length;
+      allLinksEl.textContent = total.toLocaleString('pt-BR');
+      shownLinksEl.textContent = total.toLocaleString('pt-BR');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initUI();
+    });
+  </script>
+</body>
+</html>
